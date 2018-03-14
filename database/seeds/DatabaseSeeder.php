@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::create(array("name"=>"丙", "email"=>"3@qq.com", "password"=>"123"));
         \App\Models\User::create(array("name"=>"丁", "email"=>"4@qq.com", "password"=>"123"));
 
-        \App\Models\User::truncate();
+        \App\Models\Product::truncate();
         for ($i = 1; $i < 10; $i++) {
             \App\Models\Product::create(array(
                 'name' => "套餐{$i}"
@@ -30,6 +30,11 @@ class DatabaseSeeder extends Seeder
                     'user_id' => $i,
                     'product_id' => $n,
                     'month' => '201801',
+                ));
+                \App\Models\Order::create(array(
+                    'user_id' => $i,
+                    'product_id' => $n,
+                    'month' => '201802',
                 ));
             }
         }
