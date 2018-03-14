@@ -75,7 +75,7 @@ class ProductController extends Controller
     {
         return Admin::form(\App\Models\Product::class, function (Form $form) {
             $form->display('id');
-            $form->text('name');
+            $form->text('name')->rules('required|min:3|max:10');
         });
     }
 

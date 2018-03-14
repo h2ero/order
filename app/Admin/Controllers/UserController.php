@@ -76,8 +76,8 @@ class UserController extends Controller
     {
         return Admin::form(\App\Models\User::class, function (Form $form) {
             $form->display('id');
-            $form->text('name');
-            $form->text('email');
+            $form->text('name')->rules('required|min:3|max:10');
+            $form->text('email')->rules('required|email|max:30');
         });
     }
 

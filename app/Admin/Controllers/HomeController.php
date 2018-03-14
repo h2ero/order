@@ -19,7 +19,7 @@ class HomeController extends Controller
 
             $content->row(function ($row) use ($content) {
                 $content->row(function ($row) {
-                    $row->column(3, new InfoBox('员工管理', 'users', 'aqua', '/admin/users', \App\Models\User::count()));
+                    $row->column(3, new InfoBox('员工管理', 'users', 'aqua', '/admin/user', \App\Models\User::count()));
                     $row->column(3, new InfoBox('套餐管理', 'book', 'yellow', '/admin/product', \App\Models\Product::count()));
                     $row->column(3, new InfoBox('订餐记录', 'book', 'yellow', '/admin/order', \App\Models\Order::count()));
                     $row->column(3, new InfoBox('月度报表', 'file', 'red', '/admin/order/stats', \App\Models\Order::select(\DB::raw('count(distinct month) c'))->value('c')));
