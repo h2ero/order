@@ -38,17 +38,17 @@ class OrderController extends Controller
 
             $grid->id('ID')->sortable();
 
-            $grid->column('user_name')->display(function() {
+            $grid->column('user_name', __("fields.user_name"))->display(function() {
                 return $this->user->name;
             });
 
-            $grid->column('product_name')->display(function() {
+            $grid->column('product_name', __("fields.product_name"))->display(function() {
                 return $this->product->name;
             });
-            $grid->month()->sortable();
+            $grid->month(__('fields.month'))->sortable();
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at(__("fields.created_at"));
+            $grid->model()->where('created_at', ">=", date('Y-m-d 00:00', time()));
             $grid->model()->orderBy('id', 'desc');
             $grid->disableCreateButton();
             $grid->disableActions();
@@ -64,32 +64,7 @@ class OrderController extends Controller
         });
     }
 
-    /**
-     * Edit interface.
-     *
-     * @param $id
-     * @return Content
-     */
-    public function edit($id)
-    {
-        return Admin::content(function (Content $content) use ($id) {
-            $content->header('修改订单信息');
-            $content->body($this->form()->edit($id));
-        });
-    }
 
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
-    {
-        return Admin::form(\App\Models\Order::class, function (Form $form) {
-            $form->display('id');
-            $form->text('name');
-        });
-    }
 
     public function stats()
     {
@@ -109,9 +84,9 @@ class OrderController extends Controller
                 }
                 
                 $table = new Table(array(
-                    'month',
-                    'user_name',
-                    'times'
+                    __('fields.month'),
+                    __('fields.user_name'),
+                    __('fields.times')
                 ), $tableData);
 
                 $monthes = \App\Models\Order::select(\DB::raw('distinct month'))->orderBy('month', 'desc')->pluck('month');

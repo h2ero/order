@@ -35,11 +35,11 @@ class UserController extends Controller
         return Admin::grid(\App\Models\User::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->name();
-            $grid->email();
+            $grid->name(__('fields.user_name'));
+            $grid->email(__('fields.email'));
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at(__('fields.created_at'));
+            $grid->updated_at(__('fields.updated_at'));
             $grid->model()->orderBy('id', 'desc');
         });
     }
@@ -76,8 +76,8 @@ class UserController extends Controller
     {
         return Admin::form(\App\Models\User::class, function (Form $form) {
             $form->display('id');
-            $form->text('name')->rules('required|min:3|max:10');
-            $form->text('email')->rules('required|email|max:30');
+            $form->text('name', __("fields.user_name"))->rules('required|min:3|max:10');
+            $form->text('email', __("fields.email"))->rules('required|email|max:30');
         });
     }
 
